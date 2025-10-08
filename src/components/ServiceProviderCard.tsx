@@ -27,13 +27,13 @@ export default function ServiceProviderCard({ service } : ServiceProviderCardPro
                         <Text style={stylesProviderCard.infoButtonText}>Info</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={stylesProviderCard.iconButton}>
-                        <FontAwesome name="calendar" size={21} color="#2260ff" />
+                        <FontAwesome name="calendar" size={18} color='#2260ff' />
                     </TouchableOpacity>
                     <TouchableOpacity style={stylesProviderCard.iconButton}>
-                        <FontAwesome name="question-circle" size={21} color="#2260ff" />
+                        <FontAwesome name="question-circle" size={18} color='#2260ff' />
                     </TouchableOpacity>
                     <TouchableOpacity style={stylesProviderCard.iconButton}>
-                        <MaterialCommunityIcons name="cards-heart" size={21} color="#2260ff" />
+                        <MaterialCommunityIcons name="cards-heart" size={18} color='#2260ff' />
                     </TouchableOpacity>
                 </View>
             </View>
