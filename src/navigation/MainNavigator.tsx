@@ -18,7 +18,7 @@ export default function MainNavigator() {
                 <Stack.Screen
                     name="Home"
                     component={HomeScreen}
-                    options={{ title: 'Helping Hands' }}
+                    options={{ title: 'Services' }}
                 />
             </Stack.Navigator>
         </NavigationContainer>
