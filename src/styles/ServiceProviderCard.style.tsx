@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { useFonts } from "expo-font";
 
 export const stylesProviderCard = StyleSheet.create({
     card: {
@@ -49,7 +50,10 @@ export const stylesProviderCard = StyleSheet.create({
     borderRadius: 20, // Bordas totalmente arredondadas (estilo pílula)
     paddingVertical: 6,
     paddingHorizontal: 16,
-    marginRight: 14
+    marginRight: 10,
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   infoButtonText: {
     color: 'white',
@@ -57,6 +61,12 @@ export const stylesProviderCard = StyleSheet.create({
     fontSize: 15,
   },
   iconButton: {
-    marginLeft: 10, // Espaçamento entre os ícones
+    marginLeft: 5, // Espaçamento entre os ícones
+    backgroundColor: '#ffffffff',
+    borderRadius: 25,
+    width: 30,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
