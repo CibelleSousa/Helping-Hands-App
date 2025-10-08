@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity} from "react-native";
 import { ServiceProvider } from "../data/mockedServices.type";
 import { stylesProviderCard } from "../styles/ServiceProviderCard.style";
 import { FontAwesome } from "@expo/vector-icons";
+import { LeagueSpartan_500Medium, LeagueSpartan_300Light, useFonts } from "@expo-google-fonts/league-spartan";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 // Definimos as props que este componente espera receber
@@ -11,6 +12,7 @@ type ServiceProviderCardProps = {
 };
 
 export default function ServiceProviderCard({ service } : ServiceProviderCardProps) {
+    let [LoadFonts] = useFonts({LeagueSpartan_300Light, LeagueSpartan_500Medium});
     return(
         <View style={stylesProviderCard.card}>
             <Image
