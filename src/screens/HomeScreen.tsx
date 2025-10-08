@@ -1,12 +1,23 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import ServiceList from "../components/ServiceList";
-import MockedData from "../data/mockedServices";
+import React, { useState } from "react";
+import { View, StyleSheet } from "react-native";
+import ServiceList from '../components/ServiceList';
+import SortBar from '../components/SortBar';
+import SearchBar from '../components/SearchBar';
+import MockedData from '../data/mockedServices';
+import { ServiceProvider } from "../data/mockedServices.type";
 
 export default function HomeScreen() {
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const filteredServices: ServiceProvider[] = MockedData.filter(service =>
+        service.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        service.servico.toLowerCase().includes(searchTerm.toLowerCase())
+    );
     return (
         <View style={styles.container}>
-            <ServiceList services={MockedData}/>
+            <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+            <SortBar />
+            <ServiceList services={filteredServices} />
         </View>
     );
 }
