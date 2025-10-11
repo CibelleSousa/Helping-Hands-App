@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { useFonts } from "expo-font";
+import { LeagueSpartan_500Medium, LeagueSpartan_300Light} from "@expo-google-fonts/league-spartan";
 
 export const stylesProviderCard = StyleSheet.create({
     card: {
@@ -33,13 +33,14 @@ export const stylesProviderCard = StyleSheet.create({
     marginBottom: 12, // Espaço entre o texto e os botões de ação
   },
   profileName: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 22,
+    fontFamily: 'LeagueSpartan_500Medium',
     color: '#2260ff',
   },
   profileService: {
     fontSize: 16,
     color: '#17140c',
+    fontFamily: 'LeagueSpartan_300Light'
   },
   actionsContainer: {
     flexDirection: 'row', // Coloca os botões e ícones em linha

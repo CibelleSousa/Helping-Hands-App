@@ -2,6 +2,7 @@ import React from 'react';
 import { View, TextInput } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { stylesSearchBar } from '../styles/SearchBar.style';
+import { useFonts, LeagueSpartan_100Thin } from '@expo-google-fonts/league-spartan';
 
 // Definimos as props que o componente espera receber do HomeScreen
 type SearchBarProps = {
@@ -10,6 +11,7 @@ type SearchBarProps = {
 };
 
 export default function SearchBar({ searchTerm, onSearchChange }: SearchBarProps){
+    let [LoadedFonts] = useFonts({LeagueSpartan_100Thin});
     return(
         <View style={stylesSearchBar.searchContainer}>
             <View style={stylesSearchBar.inputWrapper}>

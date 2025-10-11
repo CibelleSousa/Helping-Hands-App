@@ -1,4 +1,6 @@
 import { StyleSheet } from "react-native";
+import {LeagueSpartan_100Thin} from '@expo-google-fonts/league-spartan';
+import { useFonts } from "expo-font";
 
 export const stylesSearchBar = StyleSheet.create({
   searchContainer: {
@@ -20,5 +22,6 @@ export const stylesSearchBar = StyleSheet.create({
     flex: 1,
     height: 45,
     fontSize: 16,
+    fontFamily: 'LeagueSpartan_100Thin',
   },
 });
