@@ -34,13 +34,11 @@ export const stylesProviderCard = StyleSheet.create({
   },
   profileName: {
     fontSize: 22,
-    fontFamily: 'LeagueSpartan_500Medium',
     color: '#2260ff',
   },
   profileService: {
     fontSize: 16,
     color: '#17140c',
-    fontFamily: 'LeagueSpartan_300Light'
   },
   actionsContainer: {
     flexDirection: 'row', // Coloca os botões e ícones em linha

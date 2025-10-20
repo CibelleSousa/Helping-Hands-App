@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList, StyleSheet } from "react-native";
 import { ServiceProvider } from "../data/mockedServices.type";
-import ServiceProviderCard from "./ServiceProviderCard";
+import ServiceProviderCard from "./(ServiceProviderCard)/ServiceProviderCard";
 
 // Definimos as props que este componente espera receber
 type ServiceListProps = {
