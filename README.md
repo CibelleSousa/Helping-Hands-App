@@ -77,15 +77,31 @@ O código-fonte do projeto está organizado da seguinte forma dentro da pasta `s
 
 ## 🧱 Estrutura de Dados
 
+### Estrutura de Dados dos Prestadores De Serviço
 Para garantir a consistência do desenvolvimento, todos os componentes e lógicas seguiram o seguinte "contrato de dados" para os objetos que representam os prestadores de serviço.
 
 | Campo | Tipo de Dado | Descrição | Exemplo |
 | :--- | :--- | :--- | :--- |
-| `id` | `Number` | Identificador numérico único para cada serviço. | `1` |
-| `nome` | `String` | Nome completo do prestador de serviço. | `'Letícia Oliveira'` |
-| `servico`| `String` | A especialidade ou o serviço principal oferecido. | `'Pet care specialist'` |
-| `urlFoto`| `String` | A URL completa para a imagem de perfil do prestador. | `'https://.../leticia.jpg'` |
-| `focoDescricao` | `String` | O parágrafo de descrição do serviço (Focus). | `'Focus: To provide loving...'` |
+| `id` | `Number` | Identificador numérico único. | `1` |
+| `nome` | `String` | Nome completo do prestador. | `'Letícia Oliveira'` |
+| `servico` | `String` | A especialidade principal. | `'Pet care specialist'` |
+| `urlFoto` | `String` | A URL da foto de perfil. | `'https://.../foto.jpg'` |
+| `focoDescricao` | `String` | O parágrafo "Focus" da tela de detalhes. | `'Focus: To provide...'` |
+| `avaliacao` | `Number` | A nota de avaliação (ex: 1 a 5). | `5` |
+| `comentarios` | `Number` | O número de comentários. | `40` |
+| `disponibilidade` | `String` | O texto de disponibilidade. | `'Mon-Sat / 9:00AM...'` |
+| `textoPerfil` | `String` | O parágrafo da seção "Profile". | `'I'm calm, trustworthy...'` |
+| `textoExperiencia` | `String` | O parágrafo de "Professional Experience". | `'I've been working...'` |
+| `destaques` | `String[]` | Uma lista de destaques. | `['Certified in pet...', '...']` |
+
+### Estrutura de Dados do Usuário Logado
+Além dos prestadores, o aplicativo também utiliza uma estrutura para representar o usuário atualmente logado:
+
+| Campo     | Tipo de Dado | Descrição                                               | Exemplo                                        |
+| :-------- | :----------- | :------------------------------------------------------ | :--------------------------------------------- |
+| `id`      | `String`     | Identificador único do usuário.                         | `'u1'`                                         |
+| `nome`    | `String`     | Nome completo do usuário.                               | `'João Silva'`              |
+| `urlFoto` | `Number`     | Identificador da imagem local (gerado pelo `require`). | `require('../../assets/user/user-logado.png')` |
 
 ---
 
