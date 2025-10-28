@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import ServiceList from '../components/ServiceList';
-import SortBar from '../components/(SortBar)/SortBar';
-import SearchBar from '../components/(SearchBar)/SearchBar';
+import SortBar from '../components/SortBar/SortBar';
+import SearchBar from '../components/SearchBar/SearchBar';
 import MockedData from '../data/mockedServices';
 import { ServiceProvider } from "../data/mockedServices.type";
-import RenderedText from "../components/(RenderedComponents)/RenderedText";
+import RenderedText from "../components/RenderedComponents/RenderedText";
 
 export default function HomeScreen() {
     const [searchTerm, setSearchTerm] = useState('');

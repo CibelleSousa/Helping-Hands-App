@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import placeholder from "../components/PlaceHolder";
-import RenderedText from "../components/(RenderedComponents)/RenderedText";
+import RenderedText from "../components/RenderedComponents/RenderedText";
 import { FontAwesome } from "@expo/vector-icons";
 
 export default function WIPScreen(){

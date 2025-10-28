@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity} from "react-native";
 import { ServiceProvider } from "../../data/mockedServices.type";
 import { stylesProviderCard } from "./ServiceProviderCard.style";
 import { FontAwesome } from "@expo/vector-icons";
-import RenderedText from "../(RenderedComponents)/RenderedText";
+import RenderedText from "../RenderedComponents/RenderedText";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 // Definimos as props que este componente espera receber

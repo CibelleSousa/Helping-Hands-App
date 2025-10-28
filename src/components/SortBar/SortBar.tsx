@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { stylesSortBar } from './SortBar.styles';
-import RenderedText from '../(RenderedComponents)/RenderedText';
+import RenderedText from '../RenderedComponents/RenderedText';
 
 export default function SortBar() {
   return (

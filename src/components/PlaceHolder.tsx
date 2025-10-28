@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import RenderedText from "./(RenderedComponents)/RenderedText";
+import RenderedText from "./RenderedComponents/RenderedText";
 import { FontAwesome } from "@expo/vector-icons";
 
 export default function placeholder(){
