@@ -24,32 +24,10 @@ type ScreenOptionsProps = {
 };
 Font.getLoadedFonts();
 const screenOptions: (props: ScreenOptionsProps) => NativeStackNavigationOptions = ({ route }) => ({
-  title: 'Services',
-  headerTitleAlign: 'center',
-  headerTintColor: "#E67E22",  
-  headerBackTitle: '',
-  headerShadowVisible: false,
-  headerTitleStyle: {fontFamily: 'LeagueSpartan_600SemiBold', fontSize: 30},
-  headerLeft: () => (
-    <View style={{flexDirection: 'row'}}>
-      <TouchableOpacity style={{marginLeft: 10}}>
-        <FontAwesome name="chevron-left" size={22} color="#E67E22" />
-       </TouchableOpacity>
-    </View>
-  ),
-  headerRight: () => (
-    <View style={{ flexDirection: 'row' }}>
-      <TouchableOpacity style={{ marginRight: 20 }}>
-        <FontAwesome name="search" size={22} color="#E67E22" />
-      </TouchableOpacity>
-      <TouchableOpacity style={{marginRight: 20 }}>
-        <FontAwesome name="sliders" size={22} color="#E67E22" />
-      </TouchableOpacity>
-    </View>
-  ),
+  title: 'WIP',
 });
 
-export default function MainNavigator() {
+export default function ReplaceNavigator() {
   let [fontsLoaded] = useFonts({LeagueSpartan_600SemiBold});
 
   return (
@@ -57,7 +35,7 @@ export default function MainNavigator() {
       <Stack.Navigator screenOptions={screenOptions}>
         <Stack.Screen
           name="Home"
-          component={HomeScreen}
+          component={WIPScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

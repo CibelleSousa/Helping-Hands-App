@@ -1,9 +1,9 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity} from "react-native";
-import { ServiceProvider } from "../data/mockedServices.type";
-import { stylesProviderCard } from "../styles/ServiceProviderCard.style";
+import { ServiceProvider } from "../../data/mockedServices.type";
+import { stylesProviderCard } from "./ServiceProviderCard.style";
 import { FontAwesome } from "@expo/vector-icons";
-import { LeagueSpartan_500Medium, LeagueSpartan_300Light, useFonts } from "@expo-google-fonts/league-spartan";
+import RenderedText from "../RenderedComponents/RenderedText";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 // Definimos as props que este componente espera receber
@@ -12,7 +12,7 @@ type ServiceProviderCardProps = {
 };
 
 export default function ServiceProviderCard({ service } : ServiceProviderCardProps) {
-    let [LoadFonts] = useFonts({LeagueSpartan_300Light, LeagueSpartan_500Medium});
+    
     return(
         <View style={stylesProviderCard.card}>
             <Image
@@ -21,12 +21,12 @@ export default function ServiceProviderCard({ service } : ServiceProviderCardPro
             />
             <View style={stylesProviderCard.infoContainer}>
                 <View style={stylesProviderCard.textContainer}>
-                    <Text style={stylesProviderCard.profileName}>{service.nome}</Text>
-                    <Text style={stylesProviderCard.profileService}>{service.servico}</Text>
+                    <RenderedText style={stylesProviderCard.profileName} fontFamily='LeagueSpartan_500Medium'>{service.nome}</RenderedText>
+                    <RenderedText style={stylesProviderCard.profileService} fontFamily='LeagueSpartan_300Light'>{service.servico}</RenderedText>
                 </View>
                 <View style={stylesProviderCard.actionsContainer}>
                     <TouchableOpacity style={stylesProviderCard.infoButton}>
-                        <Text style={stylesProviderCard.infoButtonText}>Info</Text>
+                        <RenderedText style={stylesProviderCard.infoButtonText}>Info</RenderedText>
                     </TouchableOpacity>
                     <TouchableOpacity style={stylesProviderCard.iconButton}>
                         <FontAwesome name="calendar" size={18} color='#2260ff' />

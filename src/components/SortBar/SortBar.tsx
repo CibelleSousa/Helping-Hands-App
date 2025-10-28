@@ -1,14 +1,15 @@
 import React from 'react';
 import { View, Text, TouchableOpacity} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import { stylesSortBar } from '../styles/SortBar.styles';
+import { stylesSortBar } from './SortBar.styles';
+import RenderedText from '../RenderedComponents/RenderedText';
 
 export default function SortBar() {
   return (
     <View style={stylesSortBar.container}>
-      <Text style={stylesSortBar.sortByText}>Sort By</Text>
+      <RenderedText style={stylesSortBar.sortByText}>Sort By</RenderedText>
       <TouchableOpacity style={stylesSortBar.button}>
-        <Text style={stylesSortBar.buttonText}>A-Z</Text>
+        <RenderedText>A-Z</RenderedText>
       </TouchableOpacity>
       <TouchableOpacity style={stylesSortBar.iconButton}>
         <FontAwesome name="star-o" size={20} color="#E67E22" />
