@@ -10,7 +10,7 @@ import { LeagueSpartan_600SemiBold } from '@expo-google-fonts/league-spartan';
 import HomeScreen from '../screens/HomeScreen';
 import Profile from '../screens/profile/Profile';
 import WIPScreen from '../screens/WIPScreen';
-import Login from '../screens/auth/Login';
+import ServiceInfo from '../screens/services/ServiceInfo';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -59,7 +59,7 @@ export default function MainNavigator() {
       <Stack.Navigator screenOptions={screenOptions}>
         <Stack.Screen
           name="Home"
-          component={HomeScreen}
+          component={ServiceInfo}
         />
       </Stack.Navigator>
     </NavigationContainer>
