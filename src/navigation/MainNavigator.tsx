@@ -59,7 +59,7 @@ export default function MainNavigator() {
       <Stack.Navigator screenOptions={screenOptions}>
         <Stack.Screen
           name="Home"
-          component={ServiceInfo}
+          component={Profile}
         />
       </Stack.Navigator>
     </NavigationContainer>
