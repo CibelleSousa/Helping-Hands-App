@@ -5,7 +5,7 @@ const stylesInfoCard = StyleSheet.create({
     backgroundColor: '#FEE38A',
     padding: 20,
     borderRadius: 30,
-    marginTop: 70,
+    marginTop: 10,
     marginBottom: 10, // Espaço antes da próxima seção
     width: 300,
     alignSelf: 'center',

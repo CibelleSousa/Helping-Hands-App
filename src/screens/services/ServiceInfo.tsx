@@ -1,14 +1,15 @@
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import MockedData from "../../data/mockedServices";
 import ServiceProviderInfoCard from "../../components/ServiceProviderInfoCard/ServiceProviderInfoCard";
 import ServiceProviderInfoText from "../../components/ServiceProviderInfoText/ServiceProviderInfoText";
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { ServiceStackParamList } from "../../routes/ServicesStackNavigator"; 
 
-// Apenas para testar o estilo da tela
-const exampleService = MockedData.find(service => service.id === 1);
+type ServiceInfoProps = NativeStackScreenProps<ServiceStackParamList, 'ServiceInfo'>;
 
-export default function ServiceInfo(){
-    if(!exampleService){
+export default function ServiceInfo({ route }: ServiceInfoProps){
+    const { service } = route.params;
+    if(!service){
         return (
             <View style={styles.loadingContainer}>
                 <Text>Serviço não encontrado!</Text>
@@ -17,8 +18,8 @@ export default function ServiceInfo(){
     }
     return(
         <ScrollView style={styles.container}>
-            <ServiceProviderInfoCard service={exampleService} />
-            <ServiceProviderInfoText service={exampleService} />
+            <ServiceProviderInfoCard service={service} />
+            <ServiceProviderInfoText service={service} />
         </ScrollView>
     );
     

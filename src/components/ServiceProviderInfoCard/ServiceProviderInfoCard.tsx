@@ -33,7 +33,7 @@ export default function ServiceProviderInfoCard({ service }: ServiceProviderInfo
                         <RenderedText style={stylesInfoCard.infoText}>{service.comentarios}</RenderedText>
                     </View>
                 </View>
-                <View style={[stylesInfoCard.infoItem , {width: 166}]}>
+                <View style={[stylesInfoCard.infoItem , {minWidth: 166, width: 'auto'}]}>
                     <Ionicons name="alarm-outline" size={14} color="#2260FF" />
                     <RenderedText style={stylesInfoCard.infoText}>{service.disponibilidade}</RenderedText>
                 </View>
