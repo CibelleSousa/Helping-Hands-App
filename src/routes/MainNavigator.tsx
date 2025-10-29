@@ -34,15 +34,27 @@ export default function MainNavigator(){
                         height: 50,
                         width: '90%',
                         marginLeft: 20,
-                        alignItems: 'center'
+                        alignContent: 'center',
+                        justifyContent: 'center',
+                        textAlign: 'center'
                     },
                     tabBarIcon: ({ size }) => {
                         let iconName: React.ComponentProps<typeof FontAwesome>['name'] = 'question-circle';
 
                         if (route.name === 'HomeTab') {
                             return (
-                                <View style={{position: 'relative', width:64, height:64, backgroundColor: '#FEE38A', alignItems: 'center', borderRadius: 100, paddingVertical: 16, marginBottom: 40, borderWidth: 2, borderColor: '#A04D1C'}}>
-                                    <FontAwesome name='home' size={30} color="#560000"/>
+                                <View style={{position: 'relative', alignContent: 'center', marginBottom: 30}}>
+                                    <FontAwesome name='home' size={30} color="#560000" 
+                                    style = {{textAlign: 'center',
+                                              backgroundColor: '#FEE38A',
+                                              height: 64,
+                                              width: 64,
+                                              alignContent: 'center',
+                                              borderRadius: '100%',
+                                              borderWidth: 2,
+                                              borderColor: '#A04D1C'
+
+                                     }}/>
                                 </View>
                             );
                         } else if (route.name === 'ServicesStack') {

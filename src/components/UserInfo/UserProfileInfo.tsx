@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         gap: 10,
-        paddingBottom: 10
+        paddingBottom: 10,
+        paddingTop: 10
     },
 
     photoIcon: {
