@@ -10,6 +10,7 @@ import { LeagueSpartan_600SemiBold } from '@expo-google-fonts/league-spartan';
 import HomeScreen from '../screens/HomeScreen';
 import Profile from '../screens/profile/Profile';
 import WIPScreen from '../screens/WIPScreen';
+import Login from '../screens/auth/Login';
 
 export type RootStackParamList = {
   Home: undefined;
