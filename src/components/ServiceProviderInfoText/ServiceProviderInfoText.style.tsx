@@ -4,6 +4,7 @@ const stylesInfoText = StyleSheet.create({
   bottomSection: {
     width: 300,
     alignSelf: 'center',
+    paddingBottom: 150
   },
   sectionTitle: {
     fontSize: 20,
