@@ -12,7 +12,7 @@ export default function UserProfileInfo({ profile }: UserProfileInfoProps){
     return(
         <View style = {styles.head}>
                 <TouchableOpacity style = {styles.photoIcon}>
-                    <Image source={{uri: profile.urlFoto}} style = {styles.profilePic}/>
+                    <Image source={profile.urlFoto} style = {styles.profilePic}/>
                     <FontAwesome name="pencil" style = {styles.editPhoto}/>
                 </TouchableOpacity>
                 <RenderedText style={styles.profileName}>{profile.nome}</RenderedText>
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: 10,
         paddingBottom: 10,
-        paddingTop: 10
+        paddingTop: 50
     },
 
     photoIcon: {
@@ -39,10 +39,10 @@ const styles = StyleSheet.create({
     },
 
     profilePic: {
+        flex: 1,
         height: 100, 
         width: 100, 
         aspectRatio: 1/1, 
-        backgroundColor: "#000", 
         borderRadius: 100,
         resizeMode: 'center',
         borderColor: '#f58484ff'

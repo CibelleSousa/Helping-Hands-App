@@ -9,13 +9,13 @@ export default function SortBar() {
     <View style={stylesSortBar.container}>
       <RenderedText style={stylesSortBar.sortByText}>Sort By</RenderedText>
       <TouchableOpacity style={stylesSortBar.button}>
-        <RenderedText>A-Z</RenderedText>
+        <RenderedText style={{color: '#FFF'}}>A-Z</RenderedText>
       </TouchableOpacity>
       <TouchableOpacity style={stylesSortBar.iconButton}>
-        <FontAwesome name="star-o" size={20} color="#E67E22" />
+        <FontAwesome name="star-o" size={20} color="#A04D1C" />
       </TouchableOpacity>
       <TouchableOpacity style={stylesSortBar.iconButton}>
-        <FontAwesome name="heart-o" size={20} color="#E67E22" />
+        <FontAwesome name="heart-o" size={20} color="#A04D1C" />
       </TouchableOpacity>
     </View>
   );

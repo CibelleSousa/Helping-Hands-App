@@ -49,8 +49,8 @@ export default function MainNavigator(){
                                               backgroundColor: '#FEE38A',
                                               height: 64,
                                               width: 64,
-                                              alignContent: 'center',
-                                              borderRadius: '100%',
+                                              textAlignVertical: 'center',
+                                              borderRadius: 100,
                                               borderWidth: 2,
                                               borderColor: '#A04D1C'
 
