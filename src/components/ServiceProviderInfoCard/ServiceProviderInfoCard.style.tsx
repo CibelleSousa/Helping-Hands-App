@@ -71,13 +71,13 @@ const stylesInfoCard = StyleSheet.create({
   },
   infoItem: {
     flexDirection: 'row',
-    alignItems: 'baseline',
+    alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 5,
     paddingVertical: 4,
     borderRadius: 10,
     backgroundColor: '#FFF',
-    gap: 2
+    gap: 5
   },
   infoText: {
     fontSize: 12,
@@ -98,7 +98,7 @@ const stylesInfoCard = StyleSheet.create({
     borderRadius: 13,
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 3,
+    gap: 5,
   },
   scheduleText: {
     color: '#FFF',

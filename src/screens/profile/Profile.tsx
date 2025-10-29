@@ -119,6 +119,8 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         textAlign: 'center',
         alignContent: 'center',
+        alignSelf: 'center',
+        textAlignVertical: 'center',
         color: '#A04D1C',
     },
 

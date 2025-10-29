@@ -40,11 +40,11 @@ const styles = StyleSheet.create({
 
     profilePic: {
         flex: 1,
-        height: 100, 
-        width: 100, 
+        height: '100%', 
+        width: '100%', 
         aspectRatio: 1/1, 
         borderRadius: 100,
-        resizeMode: 'center',
+        resizeMode: 'cover',
         borderColor: '#f58484ff'
     },
 
@@ -52,12 +52,13 @@ const styles = StyleSheet.create({
         fontSize: 20,
         backgroundColor: '#2260FF',
         height: 30,
-        aspectRatio: 1/1,
+        aspectRatio: 1,
         alignContent: 'center',
         textAlign: 'center',
         borderRadius: 25,
-        right: 30,
-        bottom: 15
+        right: 0,
+        bottom: 0,
+        position: 'absolute'
     },
 
     profileName: {

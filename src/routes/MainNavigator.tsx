@@ -46,6 +46,7 @@ export default function MainNavigator(){
                                 <View style={{position: 'relative', alignContent: 'center', marginBottom: 30}}>
                                     <FontAwesome name='home' size={30} color="#560000" 
                                     style = {{textAlign: 'center',
+                                            alignContent:  'center',
                                               backgroundColor: '#FEE38A',
                                               height: 64,
                                               width: 64,
