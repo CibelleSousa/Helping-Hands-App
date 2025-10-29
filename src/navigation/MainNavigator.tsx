@@ -8,6 +8,7 @@ import { RouteProp } from '@react-navigation/native';
 import { useFonts } from '@expo-google-fonts/league-spartan';
 import { LeagueSpartan_600SemiBold } from '@expo-google-fonts/league-spartan';
 import HomeScreen from '../screens/HomeScreen';
+import Profile from '../screens/profile/Profile';
 import WIPScreen from '../screens/WIPScreen';
 import ServiceInfo from '../screens/services/ServiceInfo';
 
