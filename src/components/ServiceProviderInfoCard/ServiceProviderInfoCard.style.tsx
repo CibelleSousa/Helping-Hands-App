@@ -33,8 +33,9 @@ const stylesInfoCard = StyleSheet.create({
   },
   focusText: {
     color: 'white',
+    fontFamily: 'LeagueSpartan_300Light',
     fontSize: 14,
-    textAlign: 'left'
+    textAlign: 'justify'
   },
   profileBox:{
     flex: 1,
@@ -57,7 +58,7 @@ const stylesInfoCard = StyleSheet.create({
   },
   profileService: {
     fontSize: 14,
-    fontWeight: '600',
+    fontFamily: 'LeagueSpartan_600SemiBold',
     color: '#252525ff',
     textAlign: 'center',
   },
@@ -70,7 +71,7 @@ const stylesInfoCard = StyleSheet.create({
   },
   infoItem: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'baseline',
     justifyContent: 'center',
     paddingHorizontal: 5,
     paddingVertical: 4,
@@ -80,7 +81,7 @@ const stylesInfoCard = StyleSheet.create({
   },
   infoText: {
     fontSize: 12,
-    fontWeight: 'light',
+    fontFamily: 'LeagueSpartan_300Light',
     color: '#2260FF',
   },
   actionBox:{
@@ -102,7 +103,7 @@ const stylesInfoCard = StyleSheet.create({
   scheduleText: {
     color: '#FFF',
     fontSize: 12,
-    fontWeight: '600'
+    fontFamily: 'LeagueSpartan_600SemiBold',
   },
   favoriteButton:{
     width: 25,

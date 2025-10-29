@@ -5,6 +5,6 @@ import ReplaceNavigator from "./src/navigation/ReplaceNavigator";
 
 export default function App(){
     return (
-        <ReplaceNavigator/>
+        <MainNavigator/>
     );
 }
