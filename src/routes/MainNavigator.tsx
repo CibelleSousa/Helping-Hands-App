@@ -24,19 +24,17 @@ export default function MainNavigator(){
                 screenOptions={({ route }) => ({
                     headerShown: false, 
                     tabBarStyle:{
-                        position: 'absolute',
+                        position: 'relative',
                         bottom: 25,
-                        left: 20,
-                        right: 20,
                         elevation: 5,
                         backgroundColor: '#A04D1C',
                         borderRadius: 24,
                         height: 50,
                         width: '90%',
-                        marginLeft: 20,
                         alignContent: 'center',
                         justifyContent: 'center',
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        alignSelf: 'center'
                     },
                     tabBarIcon: ({ size }) => {
                         let iconName: React.ComponentProps<typeof FontAwesome>['name'] = 'question-circle';
