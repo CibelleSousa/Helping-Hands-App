@@ -1,10 +1,8 @@
 import React from "react";
-import ServiceInfo from "./src/screens/services/ServiceInfo"; // Para testar a tela
-import MainNavigator from "./src/navigation/MainNavigator";
-import ReplaceNavigator from "./src/navigation/ReplaceNavigator";
+import MainNavigator from "./src/routes/MainNavigator";
 
 export default function App(){
     return (
-        <MainNavigator/>
+        <MainNavigator />
     );
 }

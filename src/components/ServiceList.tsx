@@ -5,14 +5,15 @@ import ServiceProviderCard from "./ServiceProviderCard/ServiceProviderCard";
 
 // Definimos as props que este componente espera receber
 type ServiceListProps = {
-    services: ServiceProvider[];
+    services: ServiceProvider[],
+    onServicePress: (service: ServiceProvider) => void,
 };
 
-export default function ServiceList({ services }: ServiceListProps) {
+export default function ServiceList({ services, onServicePress }: ServiceListProps) {
     return(
         <FlatList
             data={services}
-            renderItem={({ item }) => <ServiceProviderCard service={item} />}
+            renderItem={({ item }) => <ServiceProviderCard service={item} onInfoPress={onServicePress} />}
             keyExtractor={item => item.id.toString()}
             style={styles.list}
         />

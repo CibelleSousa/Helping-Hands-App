@@ -5,19 +5,29 @@ import SortBar from '../../components/SortBar/SortBar';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import MockedData from '../../data/mockedServices';
 import { ServiceProvider } from "../../data/mockedServices.type";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { ServiceStackParamList } from "../../routes/ServicesStackNavigator";
 
-export default function Services() {
+
+type ServiceProps = NativeStackScreenProps<ServiceStackParamList, 'ServiceList'>;
+
+export default function Services({ navigation }: ServiceProps) {
     const [searchTerm, setSearchTerm] = useState('');
 
     const filteredServices: ServiceProvider[] = MockedData.filter(service =>
         service.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
         service.servico.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    const handleNavigateToDetails = (service: ServiceProvider) => {
+        navigation.navigate('ServiceInfo', { service: service });
+    };
+
     return (
         <View style={styles.container}>
             <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
             <SortBar />
-            <ServiceList services={filteredServices} />
+            <ServiceList services={filteredServices} onServicePress={handleNavigateToDetails} />
         </View>
     );
 }

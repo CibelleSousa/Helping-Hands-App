@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity} from "react-native";
+import { View, Image, TouchableOpacity} from "react-native";
 import { ServiceProvider } from "../../data/mockedServices.type";
 import { stylesProviderCard } from "./ServiceProviderCard.style";
 import { FontAwesome } from "@expo/vector-icons";
@@ -8,10 +8,11 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 // Definimos as props que este componente espera receber
 type ServiceProviderCardProps = {
-    service: ServiceProvider
+    service: ServiceProvider,
+    onInfoPress: (service: ServiceProvider) => void,
 };
 
-export default function ServiceProviderCard({ service } : ServiceProviderCardProps) {
+export default function ServiceProviderCard({ service, onInfoPress } : ServiceProviderCardProps) {
     
     return(
         <View style={stylesProviderCard.card}>
@@ -25,7 +26,7 @@ export default function ServiceProviderCard({ service } : ServiceProviderCardPro
                     <RenderedText style={stylesProviderCard.profileService} fontFamily='LeagueSpartan_300Light'>{service.servico}</RenderedText>
                 </View>
                 <View style={stylesProviderCard.actionsContainer}>
-                    <TouchableOpacity style={stylesProviderCard.infoButton}>
+                    <TouchableOpacity style={stylesProviderCard.infoButton} onPress={() => onInfoPress(service)}>
                         <RenderedText style={stylesProviderCard.infoButtonText}>Info</RenderedText>
                     </TouchableOpacity>
                     <TouchableOpacity style={stylesProviderCard.iconButton}>
