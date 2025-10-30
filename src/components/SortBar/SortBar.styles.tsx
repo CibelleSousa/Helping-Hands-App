@@ -14,15 +14,11 @@ export const stylesSortBar = StyleSheet.create({
     marginRight: 10,
   },
   button: {
-    backgroundColor: '#FFE4B5',
+    backgroundColor: '#A04D1C',
     borderRadius: 15,
     paddingHorizontal: 12,
     paddingVertical: 6,
     marginRight: 10,
-  },
-  buttonText: {
-    color: '#E67E22',
-    fontWeight: 'bold',
   },
   iconButton: {
     marginRight: 10,

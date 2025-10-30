@@ -24,25 +24,36 @@ export default function MainNavigator(){
                 screenOptions={({ route }) => ({
                     headerShown: false, 
                     tabBarStyle:{
-                        position: 'absolute',
+                        position: 'relative',
                         bottom: 25,
-                        left: 20,
-                        right: 20,
                         elevation: 5,
                         backgroundColor: '#A04D1C',
                         borderRadius: 24,
                         height: 50,
                         width: '90%',
-                        marginLeft: 20,
-                        alignItems: 'center'
+                        alignContent: 'center',
+                        justifyContent: 'center',
+                        textAlign: 'center',
+                        alignSelf: 'center'
                     },
                     tabBarIcon: ({ size }) => {
                         let iconName: React.ComponentProps<typeof FontAwesome>['name'] = 'question-circle';
 
                         if (route.name === 'HomeTab') {
                             return (
-                                <View style={{position: 'relative', width:64, height:64, backgroundColor: '#FEE38A', alignItems: 'center', borderRadius: 100, paddingVertical: 16, marginBottom: 40, borderWidth: 2, borderColor: '#A04D1C'}}>
-                                    <FontAwesome name='home' size={30} color="#560000"/>
+                                <View style={{position: 'relative', alignContent: 'center', marginBottom: 30}}>
+                                    <FontAwesome name='home' size={30} color="#560000" 
+                                    style = {{textAlign: 'center',
+                                            alignContent:  'center',
+                                              backgroundColor: '#FEE38A',
+                                              height: 64,
+                                              width: 64,
+                                              textAlignVertical: 'center',
+                                              borderRadius: 100,
+                                              borderWidth: 2,
+                                              borderColor: '#A04D1C'
+
+                                     }}/>
                                 </View>
                             );
                         } else if (route.name === 'ServicesStack') {
