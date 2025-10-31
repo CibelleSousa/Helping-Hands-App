@@ -7,15 +7,15 @@ const stylesInfoText = StyleSheet.create({
     paddingBottom: 150
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 28,
     fontFamily: 'LeagueSpartan_700Bold',
     color: '#A04D1C',
     marginTop: 20, // Espaço acima de cada título
     marginBottom: 10, // Espaço abaixo de cada título
   },
   sectionText: {
-    fontSize: 14,
-    fontFamily: 'LeagueSpartan_300Light',
+    fontSize: 20,
+    fontFamily: 'LeagueSpartan_400Regular',
     color: '#000',
     lineHeight: 20, // Melhora a legibilidade do parágrafo
   },
@@ -25,14 +25,14 @@ const stylesInfoText = StyleSheet.create({
     marginBottom: 2, // Espaço entre os itens da lista
   },
   highlightBullet: {
-    fontSize: 14,
+    fontSize: 20,
     color: '#000',
     marginRight: 8,
     lineHeight: 20, // Alinha verticalmente com o texto
   },
   highlightText: {
     flex: 1, // Faz o texto ocupar o espaço restante, quebrando a linha se necessário
-    fontSize: 14,
+    fontSize: 20,
     fontFamily: 'LeagueSpartan_400Regular',
     color: '#000',
     lineHeight: 20,
