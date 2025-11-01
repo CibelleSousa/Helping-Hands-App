@@ -1,7 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Services from '../screens/services/Services';
-import ServiceInfo from '../screens/services/ServiceInfo';
+import Services from '../screens/servicesProvider/Services';
+import ServiceInfo from '../screens/servicesProvider/ServiceInfo';
 import { ServiceProvider } from '../data/mockedServices.type';
 // imports de estilização do header
 import { RouteProp } from '@react-navigation/native';
