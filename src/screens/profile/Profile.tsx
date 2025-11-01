@@ -5,7 +5,15 @@ import { FontAwesome } from "@expo/vector-icons";
 import UserProfileInfo from "../../components/UserInfo/UserProfileInfo";
 import userMockData from "../../data/mockedUser";
 
+//imports do redux
+import { useDispatch } from 'react-redux';
+import { logout } from "../../store/slices/auth";
+
 export default function Profile() {
+    const dispatch = useDispatch();
+    const handleLogout = () => {
+        dispatch(logout());
+    };
     return (
         <View>
             <UserProfileInfo profile={userMockData}/>
@@ -70,7 +78,7 @@ export default function Profile() {
                     <FontAwesome name='chevron-right' style = {styles.button}/>
                 </TouchableOpacity>
 
-                <TouchableOpacity style = {styles.menuOption} id="Logout">
+                <TouchableOpacity style = {styles.menuOption} id="Logout" onPress={handleLogout}>
                     <View style = {styles.rightSide}>
                         <FontAwesome name='sign-out' style = {styles.icon}/>
                         <RenderedText style = {styles.menuText}>

@@ -9,13 +9,15 @@ type FooterProps ={
     buttonText: string,
     middleText: string,
     questionText: string,
-    linkText: string
+    linkText: string,
+    onMainButtonPress: () => void,
+    onLinkPress: () => void
 };
 
 export default function Footer ({ ...props } : FooterProps) {
     return(
         <View style={FooterStyles.container}>
-            <Button backgroundColor="#EF762F" color="#FFF" text={props.buttonText} />
+            <Button backgroundColor="#EF762F" color="#FFF" text={props.buttonText} onPress={props.onMainButtonPress}/>
             <RenderedText style={FooterStyles.loginOptionText}>{props.middleText}</RenderedText>
             <View style={FooterStyles.loginOptionsContainer}>
                 <TouchableOpacity style={FooterStyles.loginOptionButton}>
@@ -30,7 +32,7 @@ export default function Footer ({ ...props } : FooterProps) {
             </View>
             <View style={FooterStyles.finalTextContainer}>
                 <RenderedText fontFamily="LeagueSpartan_300Light">{props.questionText}</RenderedText>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={props.onLinkPress}>
                     <RenderedText style={FooterStyles.singUpText}>{props.linkText}</RenderedText>
                 </TouchableOpacity>
             </View>

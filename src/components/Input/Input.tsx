@@ -8,11 +8,13 @@ type InputProps ={
     inputTitle: string,
     placeholder: string,
     id?: string,
+    value: string,
+    onChangeText: (text: string) => void
 }
 
-export default function Input ({ inputTitle, id, placeholder } : InputProps){
+export default function Input ({ inputTitle, id, placeholder, value, onChangeText } : InputProps){
     if (id === 'password'){
-        const [password, setPassword] = useState('');
+        //const [password, setPassword] = useState('');
         const [showPassword, setShowPassword] = useState(false);
 
         const togglePasswordVisibility = () => {
@@ -23,7 +25,14 @@ export default function Input ({ inputTitle, id, placeholder } : InputProps){
             <View style={Inputstyles.input}>
                 <RenderedText style={Inputstyles.aboveInput}>{inputTitle}</RenderedText>
                 <View style={Inputstyles.insidePassowrdInput}>
-                    <TextInput secureTextEntry={!showPassword} placeholder={placeholder} placeholderTextColor='#EF762F' style={[Inputstyles.textInput, {flex: 1}]} value={password} onChangeText={setPassword}/>
+                    <TextInput 
+                        secureTextEntry={!showPassword} 
+                        placeholder={placeholder} 
+                        placeholderTextColor='#EF762F' 
+                        style={[Inputstyles.textInput, {flex: 1}]} 
+                        value={value} 
+                        onChangeText={onChangeText}
+                    />
                     <TouchableOpacity onPress={togglePasswordVisibility} style={{position: 'absolute', left: 266}}>
                         <FontAwesome5 name={showPassword ? 'eye' : 'eye-slash'} size={20} color="#453C3C" />
                     </TouchableOpacity>
@@ -34,7 +43,13 @@ export default function Input ({ inputTitle, id, placeholder } : InputProps){
     return(
             <View style={Inputstyles.input}>
                 <RenderedText style={Inputstyles.aboveInput}>{inputTitle}</RenderedText>
-                <TextInput placeholder={placeholder} placeholderTextColor='#EF762F' style={Inputstyles.textInput}/>
+                <TextInput 
+                    placeholder={placeholder} 
+                    placeholderTextColor='#EF762F' 
+                    style={Inputstyles.textInput}
+                    value={value}
+                    onChangeText={onChangeText}
+                />
             </View>
         );
 }
