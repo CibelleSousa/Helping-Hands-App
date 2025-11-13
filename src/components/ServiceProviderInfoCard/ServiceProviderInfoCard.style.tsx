@@ -29,11 +29,15 @@ const stylesInfoCard = StyleSheet.create({
     borderRadius: 15,
     padding: 10,
     width: 100,
+    height: 120,
+    alignItems: 'center',
+    justifyContent:'center',
+    paddingVertical: 20,
     maxHeight: 'auto'
   },
   focusText: {
     color: 'white',
-    fontFamily: 'LeagueSpartan_300Light',
+    fontFamily: 'LeagueSpartan_400Regular',
     fontSize: 14,
     textAlign: 'justify'
   },
@@ -41,20 +45,23 @@ const stylesInfoCard = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
     width: 260,
-    height: 40,
+    height: 50,
     paddingHorizontal: 65,
     borderRadius: 13,
     marginBottom: 12,
     justifyContent: 'center',
+    alignContent: 'center',
     paddingTop: 5
     
   },
   profileName: {
-    fontSize: 16,
+    fontSize: 20,
+    width: 250,
     fontWeight: 'bold',
     color: '#2260FF',
     textAlign: 'center', // Centralizado abaixo da foto/focus
-    lineHeight: 12
+    alignSelf: 'center',
+    lineHeight: 25
   },
   profileService: {
     fontSize: 14,
