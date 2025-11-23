@@ -3,8 +3,9 @@ import { View, TouchableOpacity, StyleSheet } from "react-native";
 import RenderedText from "../../components/RenderedComponents/RenderedText";
 import Input from "../../components/Input/Input";
 import Footer from "../../components/AuthFooter/Footer";
-import { useDispatch } from 'react-redux';
-import { loginSuccess } from "../../store/slices/auth";
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from "../../store/slices/auth";
+import { RootState, AppDispatch } from "../../store/store";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AuthStackParamList } from "../../routes/AuthStackNavigator";
@@ -12,17 +13,16 @@ import { AuthStackParamList } from "../../routes/AuthStackNavigator";
 type LoginNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'Login'>;
 
 export default function Login(){
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
+    const {isLoading, error} = useSelector((state: RootState) => state.auth);
+
     const navigation = useNavigation<LoginNavigationProp>();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleLogin = () => {
-        // (Aqui entraria a lógica de validação)
-        console.log('Login com:', email, password);
-        const fakeToken = 'abc123456';
-        dispatch(loginSuccess(fakeToken)); // Despacha a ação de login
+        dispatch(loginUser({email, password})); // Despacha a ação de login
     };
 
     const handleNavigateToRegister = () => {
@@ -44,6 +44,7 @@ export default function Login(){
                         <RenderedText style={styles.forgotPasswordText}>Esqueci a senha</RenderedText>
                     </TouchableOpacity>
                 </View>
+                {error && <RenderedText style={{color: 'red', textAlign: 'center', marginBottom: 10}}>{error}</RenderedText>}
                 <Footer 
                     buttonText="Entrar" 
                     middleText="Ou entre com" 
