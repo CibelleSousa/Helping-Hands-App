@@ -1,0 +1,245 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Helping Hands API",
+        "version": "1.0.0",
+        "description": "Documentação da API do projeto Helping Hands",
+        "contact": {
+            "name": "Equipe Helping Hands"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "Servidor Local"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "paths": {
+        "/auth/register": {
+            "post": {
+                "summary": "Cadastra um novo usuário (Cliente)",
+                "tags": ["Autenticação"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "fullName": {
+                                        "type": "string",
+                                        "example": "Novo Usuário"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "novo@email.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "123456"
+                                    },
+                                    "phoneNumber": {
+                                        "type": "string",
+                                        "example": "11999999999"
+                                    },
+                                    "birthDate": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1990-01-01"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "enum": ["F", "M"],
+                                        "example": "F"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuário criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {"type": "integer"},
+                                                "name": {"type": "string"},
+                                                "email": {"type": "string"},
+                                                "urlPhoto": {"type": "string", "nullable": true},
+                                                "role": {"type": "string"}
+                                            }
+                                        },
+                                        "token": {"type": "string"}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {"description": "Dados inválidos ou usuário já existe"}
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "summary": "Realiza o login do usuário",
+                "tags": ["Autenticação"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "joao@email.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "hash_senha_segura"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login realizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": { "type": "integer" },
+                                                "name": { "type": "string" },
+                                                "email": { "type": "string" },
+                                                "urlPhoto": {
+                                                    "type": "string",
+                                                    "nullable": true
+                                                },
+                                                "role": {
+                                                    "type": "string",
+                                                    "example": "user"
+                                                }
+                                            }
+                                        },
+                                        "token": { "type": "string" }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {"description": "Credenciais inválidas"}
+                }
+            }
+        },
+        "/providers": {
+            "get": {
+                "summary": "Lista todos os prestadores de serviço",
+                "tags": ["Prestadores"],
+                "security": [
+                    {"bearerAuth": []}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista retornada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {"type": "integer"},
+                                            "name": {"type": "string"},
+                                            "urlPhoto": {
+                                                "type": "string",
+                                                "nullable": true
+                                            },
+                                            "category": {"type": "string"},
+                                            "avaregeRate": {"type": "number"},
+                                            "reviewCount": {"type": "integer"},
+                                            "isFavorite": {"type": "boolean"}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {"description": "Token não fornecido ou inválido"}
+                }
+            }
+        },
+        "/providers/{id}": {
+            "get": {
+                "summary": "Obtém detalhes completos de um prestador",
+                "tags": ["Prestadores"],
+                "security": [
+                    {"bearerAuth": []}
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "ID do prestador"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalhes encontrados",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": { "type": "integer" },
+                                        "name": { "type": "string" },
+                                        "urlPhoto": { "type": "string", "nullable": true },
+                                        "category": { "type": "string" },
+                                        "avaregeRate": { "type": "number" },
+                                        "reviewCount": { "type": "integer" },
+                                        "isFavorite": { "type": "boolean" },
+                                        "focus": { "type": "string" },
+                                        "profileText": { "type": "string" },
+                                        "experienceText": { "type": "string" },
+                                        "availability": { "type": "string" },
+                                        "highlight": { 
+                                            "type": "array",
+                                            "items": { "type": "string" }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {"description": "Prestador não encontrado"}
+                }
+            }
+        }
+    }
+}
