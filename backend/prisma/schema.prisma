@@ -1,0 +1,257 @@
+generator client {
+  provider        = "prisma-client"
+  output          = "../generated/prisma"
+  previewFeatures = ["views"]
+}
+
+datasource db {
+  provider = "sqlserver"
+}
+
+model AddressState {
+  ID        Int     @id(map: "pk_state_id") @default(autoincrement())
+  Name      String  @db.VarChar(100)
+  Acronym   String  @db.Char(2)
+  CountryID Int
+  Country   Country @relation(fields: [CountryID], references: [ID], onUpdate: NoAction, map: "FK__AddressSt__Count__1273C1CD")
+  City      City[]
+}
+
+model AppNotification {
+  ID               Int              @id(map: "pk_notification_id") @default(autoincrement())
+  Title            String           @db.VarChar(100)
+  Content          String           @db.VarChar(255)
+  SendDate         DateTime         @default(now(), map: "DF__AppNotifi__SendD__2F10007B") @db.DateTime
+  IsRead           Boolean          @default(false, map: "DF__AppNotifi__IsRea__300424B4")
+  AppUserID        Int
+  TypeID           Int
+  AppUser          AppUser          @relation(fields: [AppUserID], references: [ID], onUpdate: NoAction, map: "FK__AppNotifi__AppUs__30F848ED")
+  NotificationType NotificationType @relation(fields: [TypeID], references: [ID], onUpdate: NoAction, map: "FK__AppNotifi__TypeI__31EC6D26")
+}
+
+model Appointment {
+  ID                Int               @id(map: "pk_appointment_id") @default(autoincrement())
+  ScheduledDate     DateTime          @db.DateTime
+  DescriptionText   String            @db.VarChar(255)
+  IsPaid            Boolean
+  CreatedAt         DateTime          @default(now(), map: "DF__Appointme__Creat__4AB81AF0") @db.DateTime
+  ClientID          Int
+  ServiceSuplierID  Int
+  StatusID          Int
+  AppUser           AppUser           @relation(fields: [ClientID], references: [ID], onUpdate: NoAction, map: "FK__Appointme__Clien__4BAC3F29")
+  ServiceSuplier    ServiceSuplier    @relation(fields: [ServiceSuplierID], references: [ServiceSuplierID], onUpdate: NoAction, map: "FK__Appointme__Servi__4CA06362")
+  AppointmentStatus AppointmentStatus @relation(fields: [StatusID], references: [ID], onUpdate: NoAction, map: "FK__Appointme__Statu__4D94879B")
+  ChatMessage       ChatMessage[]
+  Payment           Payment[]
+}
+
+model AppointmentStatus {
+  ID          Int           @id(map: "pk_appointmentstatus_id") @default(autoincrement())
+  Name        String        @db.VarChar(30)
+  Appointment Appointment[]
+}
+
+model AppUser {
+  ID                         Int                          @id(map: "pk_user_id") @default(autoincrement())
+  FullName                   String                       @db.VarChar(100)
+  Email                      String                       @unique(map: "UQ__AppUser__A9D1053465D780DB") @db.VarChar(250)
+  PasswordHash               String                       @db.VarChar(255)
+  PhoneNumber                String                       @unique(map: "UQ__AppUser__85FB4E388D67A251") @db.VarChar(20)
+  BirthDate                  DateTime                     @db.Date
+  ProfilePhoto               String?                      @db.VarChar(Max)
+  Gender                     String                       @db.Char(1)
+  CreatedAt                  DateTime                     @default(now(), map: "DF__AppUser__Created__1CF15040") @db.DateTime
+  AppNotification            AppNotification[]
+  Appointment                Appointment[]
+  ChatMessage                ChatMessage[]
+  NotificationSetting        NotificationSetting?
+  Review                     Review[]
+  ServiceSuplier             ServiceSuplier?
+  UserAddress                UserAddress[]
+  UserFavoriteServiceSuplier UserFavoriteServiceSuplier[]
+}
+
+model ChatMessage {
+  ID            Int         @id(map: "pk_message_id") @default(autoincrement())
+  Content       String      @db.VarChar(Max)
+  SendDate      DateTime    @default(now(), map: "DF__ChatMessa__SendD__5AEE82B9") @db.DateTime
+  MediaUrl      String?     @db.VarChar(Max)
+  AppointmentID Int
+  AuthorID      Int
+  TypeID        Int
+  Appointment   Appointment @relation(fields: [AppointmentID], references: [ID], onUpdate: NoAction, map: "FK__ChatMessa__Appoi__5BE2A6F2")
+  AppUser       AppUser     @relation(fields: [AuthorID], references: [ID], onUpdate: NoAction, map: "FK__ChatMessa__Autho__5CD6CB2B")
+  MessageType   MessageType @relation(fields: [TypeID], references: [ID], onUpdate: NoAction, map: "FK__ChatMessa__TypeI__5DCAEF64")
+}
+
+model City {
+  ID           Int            @id(map: "pk_city_id") @default(autoincrement())
+  Name         String         @db.VarChar(100)
+  StateID      Int
+  AddressState AddressState   @relation(fields: [StateID], references: [ID], onUpdate: NoAction, map: "FK__City__StateID__15502E78")
+  Neighborhood Neighborhood[]
+}
+
+model Country {
+  ID           Int            @id(map: "pk_country_id") @default(autoincrement())
+  Name         String         @db.VarChar(100)
+  Acronym      String         @db.Char(3)
+  DDI          Int
+  AddressState AddressState[]
+}
+
+model Highlight {
+  ID                      Int                       @id(map: "pk_highlight_id") @default(autoincrement())
+  Content                 String                    @db.VarChar(50)
+  Icon                    String?                   @db.VarChar(100)
+  ServiceSuplierHighlight ServiceSuplierHighlight[]
+}
+
+model MessageType {
+  ID          Int           @id(map: "pk_messagetype_id") @default(autoincrement())
+  Name        String        @db.VarChar(10)
+  ChatMessage ChatMessage[]
+}
+
+model Neighborhood {
+  ID          Int           @id(map: "pk_neighborhood_id") @default(autoincrement())
+  Name        String        @db.VarChar(100)
+  CityID      Int
+  City        City          @relation(fields: [CityID], references: [ID], onUpdate: NoAction, map: "FK__Neighborh__CityI__182C9B23")
+  UserAddress UserAddress[]
+}
+
+model NotificationSetting {
+  General   Boolean @default(true, map: "DF__Notificat__Gener__24927208")
+  Sound     Boolean @default(true, map: "DF__Notificat__Sound__25869641")
+  Vibrate   Boolean @default(true, map: "DF__Notificat__Vibra__267ABA7A")
+  Offers    Boolean @default(true, map: "DF__Notificat__Offer__276EDEB3")
+  Payments  Boolean @default(true, map: "DF__Notificat__Payme__286302EC")
+  Cashback  Boolean @default(true, map: "DF__Notificat__Cashb__29572725")
+  AppUserID Int     @id(map: "pk_notificationsetting_id")
+  AppUser   AppUser @relation(fields: [AppUserID], references: [ID], onUpdate: NoAction, map: "FK__Notificat__AppUs__2A4B4B5E")
+}
+
+model NotificationType {
+  ID              Int               @id(map: "pk_notificationtype_id") @default(autoincrement())
+  Name            String            @db.VarChar(20)
+  AppNotification AppNotification[]
+}
+
+model Payment {
+  ID            Int           @id(map: "pk_payment_id") @default(autoincrement())
+  Value         Decimal       @db.Decimal(10, 2)
+  PaymentDate   DateTime      @db.DateTime
+  AppointmentID Int
+  StatusID      Int
+  MethodID      Int
+  Appointment   Appointment   @relation(fields: [AppointmentID], references: [ID], onUpdate: NoAction, map: "FK__Payment__Appoint__5441852A")
+  PaymentMethod PaymentMethod @relation(fields: [MethodID], references: [ID], onUpdate: NoAction, map: "FK__Payment__MethodI__5629CD9C")
+  PaymentStatus PaymentStatus @relation(fields: [StatusID], references: [ID], onUpdate: NoAction, map: "FK__Payment__StatusI__5535A963")
+}
+
+model PaymentMethod {
+  ID      Int       @id(map: "pk_paymentmethod_id") @default(autoincrement())
+  Name    String    @db.VarChar(20)
+  Payment Payment[]
+}
+
+model PaymentStatus {
+  ID      Int       @id(map: "pk_paymentstatus_id") @default(autoincrement())
+  Name    String    @db.VarChar(30)
+  Payment Payment[]
+}
+
+model Review {
+  ID               Int            @id(map: "pk_review_id") @default(autoincrement())
+  Rate             Int
+  Comment          String         @db.VarChar(500)
+  SendDate         DateTime       @default(now(), map: "DF__Review__SendDate__3B75D760") @db.DateTime
+  AppUserID        Int
+  ServiceSuplierID Int
+  AppUser          AppUser        @relation(fields: [AppUserID], references: [ID], onUpdate: NoAction, map: "FK__Review__AppUserI__3C69FB99")
+  ServiceSuplier   ServiceSuplier @relation(fields: [ServiceSuplierID], references: [ServiceSuplierID], onUpdate: NoAction, map: "FK__Review__ServiceS__3D5E1FD2")
+}
+
+model ServiceCategory {
+  ID             Int              @id(map: "pk_servicecategory_id") @default(autoincrement())
+  Name           String           @db.VarChar(50)
+  Icon           String?          @db.VarChar(100)
+  ServiceSuplier ServiceSuplier[]
+}
+
+model ServiceSuplier {
+  ServiceSuplierID           Int                          @id(map: "pk_servicesuplier_id")
+  FocusDescription           String                       @db.VarChar(255)
+  Bio                        String                       @db.VarChar(100)
+  Experience                 String                       @db.VarChar(Max)
+  RatingAvarege              Float                        @default(0, map: "DF__ServiceSu__Ratin__36B12243")
+  ServiceCategoryID          Int
+  Appointment                Appointment[]
+  Review                     Review[]
+  AppUser                    AppUser                      @relation(fields: [ServiceSuplierID], references: [ID], onUpdate: NoAction, map: "FK__ServiceSu__Servi__37A5467C")
+  ServiceCategory            ServiceCategory              @relation(fields: [ServiceCategoryID], references: [ID], onUpdate: NoAction, map: "FK__ServiceSu__Servi__38996AB5")
+  ServiceSuplierAvailability ServiceSuplierAvailability[]
+  ServiceSuplierHighlight    ServiceSuplierHighlight[]
+  UserFavoriteServiceSuplier UserFavoriteServiceSuplier[]
+}
+
+model ServiceSuplierAvailability {
+  ID               Int            @id(map: "pk_avaibility_id") @default(autoincrement())
+  DayWeek          Int
+  StartTime        DateTime       @db.Time
+  EndTime          DateTime       @db.Time
+  ServiceSuplierID Int
+  ServiceSuplier   ServiceSuplier @relation(fields: [ServiceSuplierID], references: [ServiceSuplierID], onUpdate: NoAction, map: "FK__ServiceSu__Servi__403A8C7D")
+}
+
+model ServiceSuplierHighlight {
+  HighlightID      Int
+  ServiceSuplierID Int
+  Highlight        Highlight      @relation(fields: [HighlightID], references: [ID], onUpdate: NoAction, map: "FK__ServiceSu__Highl__44FF419A")
+  ServiceSuplier   ServiceSuplier @relation(fields: [ServiceSuplierID], references: [ServiceSuplierID], onUpdate: NoAction, map: "FK__ServiceSu__Servi__45F365D3")
+
+  @@id([HighlightID, ServiceSuplierID], map: "pk_servicehighlight_id")
+}
+
+model UserAddress {
+  ID             Int          @id(map: "pk_address_id") @default(autoincrement())
+  Street         String       @db.VarChar(100)
+  Number         String       @db.VarChar(20)
+  Complement     String?      @db.VarChar(50)
+  ZipCode        String       @db.VarChar(15)
+  NeighborhoodID Int
+  AppUserID      Int
+  AppUser        AppUser      @relation(fields: [AppUserID], references: [ID], onUpdate: NoAction, map: "FK__UserAddre__AppUs__21B6055D")
+  Neighborhood   Neighborhood @relation(fields: [NeighborhoodID], references: [ID], onUpdate: NoAction, map: "FK__UserAddre__Neigh__20C1E124")
+}
+
+model UserFavoriteServiceSuplier {
+  AppUserID        Int
+  ServiceSuplierID Int
+  AppUser          AppUser        @relation(fields: [AppUserID], references: [ID], onUpdate: NoAction, map: "FK__UserFavor__AppUs__60A75C0F")
+  ServiceSuplier   ServiceSuplier @relation(fields: [ServiceSuplierID], references: [ServiceSuplierID], onUpdate: NoAction, map: "FK__UserFavor__Servi__619B8048")
+
+  @@id([AppUserID, ServiceSuplierID], map: "pk_userfavorite_id")
+}
+
+view vw_ProviderCard {
+  ID            Int
+  Nome          String  @db.VarChar(100)
+  UrlFoto       String? @db.VarChar(Max)
+  Categoria     String  @db.VarChar(50)
+  NotaMedia     Decimal @db.Decimal(38, 6)
+  QtdAvaliacoes Int?
+}
+
+view vw_ProviderInfo {
+  ID             Int
+  Name           String  @db.VarChar(100)
+  UrlPhoto       String? @db.VarChar(Max)
+  Category       String  @db.VarChar(50)
+  RateAvarege    Float
+  Focus          String  @db.VarChar(255)
+  ProfileText    String  @db.VarChar(100)
+  ExperienceText String  @db.VarChar(Max)
+  ReviewCount    Int?
+}
