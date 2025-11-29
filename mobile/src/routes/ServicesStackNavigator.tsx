@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Services from '../screens/servicesProvider/Services';
 import ServiceInfo from '../screens/servicesProvider/ServiceInfo';
 import { ServiceProvider } from '../data/mockedServices.type';
+import { ProviderCardResponse } from "../interfaces/provideCard.interface";
 // imports de estilização do header
 import { RouteProp } from '@react-navigation/native';
 import * as Font from 'expo-font';
@@ -13,7 +14,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 export type ServiceStackParamList = {
     ServiceList: undefined,
-    ServiceInfo: { service: ServiceProvider }
+    ServiceInfo: { service: ProviderCardResponse }
 };
 
 const Stack = createNativeStackNavigator<ServiceStackParamList>();

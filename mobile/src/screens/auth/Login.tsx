@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import RenderedText from "../../components/RenderedComponents/RenderedText";
 import Input from "../../components/Input/Input";
 import Footer from "../../components/AuthFooter/Footer";
-import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from "../../store/slices/auth";
-import { RootState, AppDispatch } from "../../store/store";
+import { useDispatch } from 'react-redux';
+import { setCredentials } from "../../store/slices/auth";
+import { useLoginMutation } from "../../store/api/apiSlice";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AuthStackParamList } from "../../routes/AuthStackNavigator";
@@ -13,16 +13,23 @@ import { AuthStackParamList } from "../../routes/AuthStackNavigator";
 type LoginNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'Login'>;
 
 export default function Login(){
-    const dispatch = useDispatch<AppDispatch>();
-    const {isLoading, error} = useSelector((state: RootState) => state.auth);
+    const dispatch = useDispatch();
+    const [login] = useLoginMutation();
 
     const navigation = useNavigation<LoginNavigationProp>();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = () => {
-        dispatch(loginUser({email, password})); // Despacha a ação de login
+    const handleLogin = async () => {
+        try {
+            const userData = await login({email, password}).unwrap();
+            dispatch(setCredentials(userData));  // Despacha a ação de login
+        } 
+        catch (erro: any) {
+            const message = erro?.data?.error || 'Erro ao fazer o login.'
+            Alert.alert("Ops!", message);
+        } 
     };
 
     const handleNavigateToRegister = () => {
@@ -44,7 +51,6 @@ export default function Login(){
                         <RenderedText style={styles.forgotPasswordText}>Esqueci a senha</RenderedText>
                     </TouchableOpacity>
                 </View>
-                {error && <RenderedText style={{color: 'red', textAlign: 'center', marginBottom: 10}}>{error}</RenderedText>}
                 <Footer 
                     buttonText="Entrar" 
                     middleText="Ou entre com" 

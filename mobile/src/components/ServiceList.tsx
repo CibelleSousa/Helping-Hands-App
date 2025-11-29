@@ -1,12 +1,12 @@
 import React from "react";
 import { FlatList, StyleSheet } from "react-native";
-import { ServiceProvider } from "../data/mockedServices.type";
+import { ProviderCardResponse } from "../interfaces/provideCard.interface";
 import ServiceProviderCard from "./ServiceProviderCard/ServiceProviderCard";
 
 // Definimos as props que este componente espera receber
 type ServiceListProps = {
-    services: ServiceProvider[],
-    onServicePress: (service: ServiceProvider) => void,
+    services: ProviderCardResponse[],
+    onServicePress: (service: ProviderCardResponse) => void,
 };
 
 export default function ServiceList({ services, onServicePress }: ServiceListProps) {

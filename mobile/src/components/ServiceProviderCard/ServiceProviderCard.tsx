@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Image, TouchableOpacity} from "react-native";
-import { ServiceProvider } from "../../data/mockedServices.type";
+import { ProviderCardResponse } from "../../interfaces/provideCard.interface";
 import { stylesProviderCard } from "./ServiceProviderCard.style";
 import { FontAwesome } from "@expo/vector-icons";
 import RenderedText from "../RenderedComponents/RenderedText";
@@ -8,8 +8,8 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 // Definimos as props que este componente espera receber
 type ServiceProviderCardProps = {
-    service: ServiceProvider,
-    onInfoPress: (service: ServiceProvider) => void,
+    service: ProviderCardResponse,
+    onInfoPress: (service: ProviderCardResponse) => void,
 };
 
 export default function ServiceProviderCard({ service, onInfoPress } : ServiceProviderCardProps) {
@@ -17,13 +17,13 @@ export default function ServiceProviderCard({ service, onInfoPress } : ServicePr
     return(
         <View style={stylesProviderCard.card}>
             <Image
-            source={{uri: service.urlFoto || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwr_zZjgvmu4BccwDNIHic8K5dyehw7cSYA&s'}}
+            source={{uri: service.urlPhoto || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwr_zZjgvmu4BccwDNIHic8K5dyehw7cSYA&s'}}
             style={stylesProviderCard.profilePicture}
             />
             <View style={stylesProviderCard.infoContainer}>
                 <View style={stylesProviderCard.textContainer}>
-                    <RenderedText style={stylesProviderCard.profileName} fontFamily='LeagueSpartan_500Medium'>{service.nome}</RenderedText>
-                    <RenderedText style={stylesProviderCard.profileService} fontFamily='LeagueSpartan_300Light'>{service.servico}</RenderedText>
+                    <RenderedText style={stylesProviderCard.profileName} fontFamily='LeagueSpartan_500Medium'>{service.name}</RenderedText>
+                    <RenderedText style={stylesProviderCard.profileService} fontFamily='LeagueSpartan_300Light'>{service.category}</RenderedText>
                 </View>
                 <View style={stylesProviderCard.actionsContainer}>
                     <TouchableOpacity style={stylesProviderCard.infoButton} onPress={() => onInfoPress(service)}>
