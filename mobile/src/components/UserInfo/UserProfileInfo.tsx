@@ -1,21 +1,22 @@
 import { View, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { User } from '../../interfaces/auth.interface';
 import { UserProfile } from '../../data/mockedUser.type';
 import RenderedText from "../RenderedComponents/RenderedText";
 
 
 type UserProfileInfoProps = {
-    profile: UserProfile
+    profile: User
 }
 
 export default function UserProfileInfo({ profile }: UserProfileInfoProps){
     return(
         <View style = {styles.head}>
                 <TouchableOpacity style = {styles.photoIcon}>
-                    <Image source={profile.urlFoto} style = {styles.profilePic}/>
+                    <Image source={{uri: profile.urlPhoto || 'https://via.placeholder.com/150'}} style = {styles.profilePic}/>
                     <FontAwesome name="pencil" style = {styles.editPhoto}/>
                 </TouchableOpacity>
-                <RenderedText style={styles.profileName}>{profile.nome}</RenderedText>
+                <RenderedText style={styles.profileName}>{profile.name}</RenderedText>
             </View>
     );
 }

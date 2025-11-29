@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { apiSlice } from './api/apiSlice';
 import authReducer from './slices/auth' // Importamos nosso departamento
 
 // 1. Criamos a "sala de controle"
@@ -6,8 +7,9 @@ export const store = configureStore({
   // 2. Registramos todos os nossos departamentos (reducers)
   reducer: {
     auth: authReducer,
-    // No futuro, outros slices viriam aqui, ex: services: servicesReducer
+    [apiSlice.reducerPath]: apiSlice.reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware), 
 });
 
 // 3. Criamos "moldes" (tipos) para o nosso TypeScript

@@ -1,22 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import RenderedText from "../../components/RenderedComponents/RenderedText";
 import { FontAwesome } from "@expo/vector-icons";
 import UserProfileInfo from "../../components/UserInfo/UserProfileInfo";
-import userMockData from "../../data/mockedUser";
-
-//imports do redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from "../../store/slices/auth";
+import { RootState } from "../../store/store";
 
 export default function Profile() {
     const dispatch = useDispatch();
+    const user = useSelector((state: RootState) => state.auth.user);
     const handleLogout = () => {
         dispatch(logout());
     };
     return (
         <View>
-            <UserProfileInfo profile={userMockData}/>
+            {user && <UserProfileInfo profile={user}/>}
             <View style = {styles.menu}>
                 <TouchableOpacity style = {styles.menuOption} id="Profile">
                     <View style = {styles.rightSide}>

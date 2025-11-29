@@ -28,13 +28,13 @@ export const listProviders = async (req: Request, res: Response) => {
             id: provider.ID,
             name: provider.Nome,
             urlPhoto: provider.UrlFoto,
-            category: provider.Nome,
+            category: provider.Categoria,
             avaregeRate: Number(provider.NotaMedia),
             reviewCount: Number(provider.QtdAvaliacoes),
             isFavorite: myFavoritesIDs.includes(provider.ID)
         }));
 
-        res.json(response);
+        res.status(200).json(response);
 
     }
     catch (error) {

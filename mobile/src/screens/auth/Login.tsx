@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import RenderedText from "../../components/RenderedComponents/RenderedText";
 import Input from "../../components/Input/Input";
 import Footer from "../../components/AuthFooter/Footer";
 import { useDispatch } from 'react-redux';
-import { loginSuccess } from "../../store/slices/auth";
+import { setCredentials } from "../../store/slices/auth";
+import { useLoginMutation } from "../../store/api/apiSlice";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AuthStackParamList } from "../../routes/AuthStackNavigator";
@@ -13,16 +14,22 @@ type LoginNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'Login'
 
 export default function Login(){
     const dispatch = useDispatch();
+    const [login] = useLoginMutation();
+
     const navigation = useNavigation<LoginNavigationProp>();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = () => {
-        // (Aqui entraria a lógica de validação)
-        console.log('Login com:', email, password);
-        const fakeToken = 'abc123456';
-        dispatch(loginSuccess(fakeToken)); // Despacha a ação de login
+    const handleLogin = async () => {
+        try {
+            const userData = await login({email, password}).unwrap();
+            dispatch(setCredentials(userData));  // Despacha a ação de login
+        } 
+        catch (erro: any) {
+            const message = erro?.data?.error || 'Erro ao fazer o login.'
+            Alert.alert("Ops!", message);
+        } 
     };
 
     const handleNavigateToRegister = () => {

@@ -1,41 +1,41 @@
 import React from "react";
 import { View, Image, TouchableOpacity } from 'react-native';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
-import { ServiceProvider } from "../../data/mockedServices.type";
+import { ProviderProfileResponse } from "../../interfaces/providerProfile.interface";
 import stylesInfoCard from "./ServiceProviderInfoCard.style";
 import RenderedText from "../RenderedComponents/RenderedText";
 
 type ServiceProviderInfoCardProps = {
-    service: ServiceProvider
+    service: ProviderProfileResponse
 }
 
 export default function ServiceProviderInfoCard({ service }: ServiceProviderInfoCardProps){
     return(
         <View style={stylesInfoCard.topSection}>
             <View style={stylesInfoCard.header}>
-                <Image source={{ uri: service.urlFoto }} style={stylesInfoCard.profilePicture}/>
+                <Image source={{ uri: service.urlPhoto || 'https://via.placeholder.com/150' }} style={stylesInfoCard.profilePicture}/>
                     <View style={stylesInfoCard.focusBox}>
-                        <RenderedText style={stylesInfoCard.focusText}>{service.focoDescricao}</RenderedText>
+                        <RenderedText style={stylesInfoCard.focusText}>{service.focus}</RenderedText>
                     </View>
             </View>
             <View style={stylesInfoCard.profileBox}>
-                <RenderedText style={stylesInfoCard.profileName}>{service.nome}</RenderedText>
-                <RenderedText style={stylesInfoCard.profileService}>{service.servico}</RenderedText>
+                <RenderedText style={stylesInfoCard.profileName}>{service.name}</RenderedText>
+                <RenderedText style={stylesInfoCard.profileService}>{service.category}</RenderedText>
             </View>
             <View style={stylesInfoCard.infoBox}>
                 <View style={{flexDirection: 'row'}}>
                     <View style={stylesInfoCard.infoItem}>
                         <FontAwesome name="star" size={14} color="#2260FF" />
-                        <RenderedText style={stylesInfoCard.infoText}>{service.avaliacao}</RenderedText>
+                        <RenderedText style={stylesInfoCard.infoText}>{service.avaregeRate}</RenderedText>
                     </View>
                     <View style={[stylesInfoCard.infoItem, {marginLeft: 3}]}>
                         <FontAwesome name="commenting-o" size={14} color="#2260FF" />
-                        <RenderedText style={stylesInfoCard.infoText}>{service.comentarios}</RenderedText>
+                        <RenderedText style={stylesInfoCard.infoText}>{service.reviewCount}</RenderedText>
                     </View>
                 </View>
                 <View style={[stylesInfoCard.infoItem , {minWidth: 166, width: 'auto'}]}>
                     <Ionicons name="alarm-outline" size={14} color="#2260FF" />
-                    <RenderedText style={stylesInfoCard.infoText}>{service.disponibilidade}</RenderedText>
+                    <RenderedText style={stylesInfoCard.infoText}>{service.availability}</RenderedText>
                 </View>
             </View>
             <View style={stylesInfoCard.actionBox}>

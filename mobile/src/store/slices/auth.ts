@@ -1,41 +1,85 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { AuthResponse, User } from '../../interfaces/auth.interface';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// 1. Definimos o "molde" (interface) para o estado deste departamento
 interface AuthState {
-  userToken: string | null;
+  user: User | null;
+  token: string | null;
   isLoading: boolean;
 }
 
-// 2. Definimos o estado inicial (como o app começa)
 const initialState: AuthState = {
-  userToken: null, // Começa deslogado
-  isLoading: true, // Começa carregando (para checarmos se ele já tem um token salvo)
+  user: null,
+  token: null,
+  isLoading: true,
 };
 
-// 3. Criamos o "departamento" (o Slice)
+// Ação assícrona de carregar memória cache
+export const loadUserFromStorage = createAsyncThunk(
+  'auth/loadFromStorage',
+  async (_, { rejectWithValue }) => {
+    try {
+      // Tenta ler os dados salvos no celular
+      const timer = new Promise(resolve => setTimeout(resolve, 2000));
+      const tokenPromise = await AsyncStorage.getItem('@HelpingHands:token');
+      const userPromise = await AsyncStorage.getItem('@HelpingHands:user');
+
+      const [_, token, userJson] = await Promise.all([timer, tokenPromise, userPromise]);
+
+      if (token && userJson) {
+        return { token, user: JSON.parse(userJson) };
+      }
+      return null; // Não tinha nada salvo (usuário novo ou deslogado)
+    } 
+    catch (error) {
+      return rejectWithValue('Falha ao carregar dados locais');
+    }
+  }
+);
+
+
 const authSlice = createSlice({
-  name: 'auth', // O nome do departamento
+  name: 'auth', // O nome do slice
   initialState,
-  // 4. Os "botões" que alteram o estado (os Reducers)
+  // Altera o estado (os Reducers)
   reducers: {
-    // Ação para quando o login dá certo (recebe um token de mentira)
-    loginSuccess: (state, action: PayloadAction<string>) => {
-      state.userToken = action.payload; // Recebe o token falso/real
-      state.isLoading = false;
+    // Ação síncrona para salvar credenciais (usada após o sucesso do RTK Query)
+    setCredentials: (state, action: PayloadAction<AuthResponse>) =>{
+      const { user, token } = action.payload;
+      state.user = user;
+      state.token = token;
+      AsyncStorage.setItem('@HelpingHands:token', token);
+      AsyncStorage.setItem('@HelpingHands:user', JSON.stringify(user));
     },
-    // Ação para quando o usuário sai
-    logout: (state) => {
-      state.userToken = null;
-    },
-    // Ação para dizer que terminamos de carregar
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
+    // Ação para quando o usuário sai
+    logout: (state) => {
+      state.user = null;
+      state.token = null;
+      AsyncStorage.removeItem('@HelpingHands:token');
+      AsyncStorage.removeItem('@HelpingHands:user');
+    },
+  },
+  extraReducers(builder) {
+    // Cache
+    builder
+      .addCase(loadUserFromStorage.fulfilled, (state, action) =>{
+        if(action.payload){
+          state.token = action.payload.token;
+          state.user = action.payload.user;
+        }
+        state.isLoading = false;
+      })
+      .addCase(loadUserFromStorage.rejected, (state) =>{
+        state.isLoading = false;
+      });
   },
 });
 
-// 5. Exportamos os "botões" (ações) para as telas usarem
-export const { loginSuccess, logout, setLoading } = authSlice.actions;
+// Exportamos as ações para as telas usarem
+export const { setCredentials, logout, setLoading } = authSlice.actions;
 
-// 6. Exportamos o departamento inteiro para a "sala de controle" (a store)
+// Exportamos a slice para a store
 export default authSlice.reducer;

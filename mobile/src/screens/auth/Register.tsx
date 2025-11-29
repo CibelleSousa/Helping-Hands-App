@@ -1,35 +1,59 @@
 import React, { useState } from "react";
-import { View, KeyboardAvoidingView, Platform, ScrollView, TouchableOpacity, StyleSheet } from "react-native";
+import { View, KeyboardAvoidingView, Platform, ScrollView, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import Input from "../../components/Input/Input";
 import RenderedText from "../../components/RenderedComponents/RenderedText";
 import Footer from "../../components/AuthFooter/Footer";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AuthStackParamList } from "../../routes/AuthStackNavigator";
-// import { useDispatch } from 'react-redux';
-// import { signUpSuccess } from '../../store/slices/authSlice';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from "../../store/slices/auth";
+import { useRegisterMutation } from "../../store/api/apiSlice";
+
 
 type RegisterNavigationProp = NativeStackNavigationProp<AuthStackParamList, 'Register'>;
 
 export default function Register(){
     const navigation = useNavigation<RegisterNavigationProp>();
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    const [name, setName] = useState('');
+    const [registerFunc, { isLoading }] = useRegisterMutation();
+
+    const [fullName, setfullName] = useState('');
     const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [birthDate, setBirthDay] = useState('');
+    const [phoneNumber, setphoneNumber] = useState('');
+    const [birthDate, setBirthDate] = useState('');
+    const [gender, setGender] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const handleRegister = () => {
-        // (Aqui entraria a lógica de validação de senhas, etc.)
-        console.log('Registrando com:', name, email, phone);
-        // No futuro, você despacharia a ação de registro:
-        // dispatch(signUpSuccess({ nome, email, ... }));
+    const handleRegister = async () => {
+        // Validação básica de frontend
+        if (password !== confirmPassword){
+            Alert.alert("Erro!", "As senhas não conferem.");
+            return
+        }
+        if (!gender || !['M', 'F'].includes(gender.toLocaleUpperCase())){
+            Alert.alert("Erro!", "Gênero Inválido.");
+            return
+        } // Precisa de mais validações
+
+        try {
+            const response = await registerFunc({
+                fullName,
+                email,
+                phoneNumber,
+                birthDate,
+                gender: gender.toUpperCase()
+            }).unwrap();
+            
+            dispatch(setCredentials(response));
+        } 
+        catch (erro: any) {
+            const message = erro?.data?.error || 'Erro ao criar conta. Tente novamente.';
+            Alert.alert("Erro no cadastro.", message);
+        }
         
-        // Por enquanto, após o cadastro, vamos navegar para o Login
-        navigation.navigate('Login');
     };
 
     const handleNavigateToLogin = () => {
@@ -41,10 +65,10 @@ export default function Register(){
             <ScrollView>
                 <View style={styles.container}>
                     <View style={styles.inputsContainer}>
-                        <Input inputTitle="Nome Completo" placeholder="Roberto Oliveira" value={name} onChangeText={setName} />
+                        <Input inputTitle="Nome Completo" placeholder="Roberto Oliveira" value={fullName} onChangeText={setfullName} />
                         <Input inputTitle="Email" placeholder="exemplo@email.com" value={email} onChangeText={setEmail} />
-                        <Input inputTitle="Número do Telefone" placeholder="(xx) xxxxx-xxxx" value={phone} onChangeText={setPhone} />
-                        <Input inputTitle="Data de Nascimento" placeholder="DD/MM/YYYY" value={birthDate} onChangeText={setBirthDay} />
+                        <Input inputTitle="Número do Telefone" placeholder="(xx) xxxxx-xxxx" value={phoneNumber} onChangeText={setphoneNumber} />
+                        <Input inputTitle="Data de Nascimento" placeholder="DD/MM/YYYY" value={birthDate} onChangeText={setBirthDate} />
                         <Input id="password" inputTitle="Senha" placeholder="••••••••••••" value={password} onChangeText={setPassword} />
                         <Input id="password" inputTitle="Confirme Senha" placeholder="••••••••••••" value={confirmPassword} onChangeText={setConfirmPassword} />
                     </View>
