@@ -12,12 +12,11 @@ type UserProfileInfoProps = {
 export default function UserProfileInfo({ profile }: UserProfileInfoProps){
     return(
         <View style = {styles.head}>
-                <TouchableOpacity style = {styles.photoIcon}>
-                    <Image source={{uri: profile.urlPhoto || 'https://via.placeholder.com/150'}} style = {styles.profilePic}/>
-                    <FontAwesome name="pencil" style = {styles.editPhoto}/>
-                </TouchableOpacity>
-                <RenderedText style={styles.profileName}>{profile.name}</RenderedText>
-            </View>
+            <TouchableOpacity style = {styles.photoIcon}>
+                <Image source={{uri: profile.urlPhoto || 'https://via.placeholder.com/150'}} style = {styles.profilePic}/>
+            </TouchableOpacity>
+            <RenderedText style={styles.profileName}>{profile.name}</RenderedText>
+        </View>
     );
 }
 

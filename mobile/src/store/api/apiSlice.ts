@@ -5,7 +5,7 @@ import { ProviderCardResponse } from "../../interfaces/provideCard.interface";
 import { ProviderProfileResponse } from "../../interfaces/providerProfile.interface";
 
 // ⚠️ IMPORTANTE: Substitua o endereço de IP pelo endereço IPv4 do seu computador.
-const API_URL = 'http://192.168.0.106:3000';
+const API_URL = 'http://192.168.0.101:3000';
 
 const bQ = fetchBaseQuery({
     baseUrl: API_URL,

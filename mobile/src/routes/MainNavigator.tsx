@@ -5,6 +5,7 @@ import { FontAwesome, FontAwesome6 } from '@expo/vector-icons';
 import ServicesStackNavigator from './ServicesStackNavigator';
 import Profile from '../screens/profile/Profile';
 import WIPScreen from '../screens/WIPScreen';
+import HomeStackNavigator from './HomeStackNavigator';
 
 export type BottomTabParamList = {
   HomeTab: undefined,
@@ -78,7 +79,7 @@ export default function MainNavigator(){
         >
             <Tab.Screen name='ProfileTab' component={Profile} />
             <Tab.Screen name='ChatTab' component={WIPScreen} />
-            <Tab.Screen name='HomeTab' component={WIPScreen} />
+            <Tab.Screen name='HomeTab' component={HomeStackNavigator} />
             <Tab.Screen name='ServicesStack' component={ServicesStackNavigator} />
             <Tab.Screen name='CalendarTab' component={WIPScreen} />
         </Tab.Navigator>

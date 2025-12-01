@@ -22,7 +22,7 @@ export default function RootNavigator() {
     return <Splash />;
   }
 
-  return (
+  return (   
     userToken == null ? <AuthStackNavigator /> : <MainNavigator />
   );
   

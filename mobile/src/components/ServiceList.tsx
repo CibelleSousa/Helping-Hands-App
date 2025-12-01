@@ -23,5 +23,6 @@ export default function ServiceList({ services, onServicePress }: ServiceListPro
 const styles = StyleSheet.create({
     list: {
         width: '100%',
+        marginBottom: 25
     }
 });

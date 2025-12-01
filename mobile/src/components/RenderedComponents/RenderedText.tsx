@@ -1,4 +1,4 @@
-import {Text, useColorScheme} from 'react-native';
+import {Text, useColorScheme, TextProps } from 'react-native';
 import {colors} from '../../constants/colors';
 import {    LeagueSpartan_100Thin,
             LeagueSpartan_200ExtraLight,
@@ -11,13 +11,13 @@ import {    LeagueSpartan_100Thin,
             LeagueSpartan_900Black,
             useFonts } from "@expo-google-fonts/league-spartan";
 
-export type Props = {
+export interface Props extends TextProps {
     style?: object,
     fontFamily?: string,
     children: React.ReactNode
 }
 
-const RenderedText = ({style, fontFamily = 'LeagueSpartan_500Medium', children}:Props) => {
+const RenderedText = ({style, fontFamily = 'LeagueSpartan_500Medium', children, ...props}:Props) => {
     const styles = style?? {}
     const colorScheme = useColorScheme()?? 'dark'
     const theme = colors[colorScheme] ?? colors.light
@@ -32,9 +32,8 @@ const RenderedText = ({style, fontFamily = 'LeagueSpartan_500Medium', children}:
             LeagueSpartan_800ExtraBold,
             LeagueSpartan_900Black,})
     return (
-        <Text
-            style={[{color: textColor, fontFamily: fontFamily}, styles]}>
-                {children}
+        <Text {...props} style={[{color: textColor, fontFamily: fontFamily}, styles]}>
+            {children}
         </Text>
     )
 
