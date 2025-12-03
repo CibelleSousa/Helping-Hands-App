@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, KeyboardAvoidingView, Platform, ScrollView, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import Input from "../../components/Input/Input";
+import GenderSelector from "../../components/GenderSelector/GenderSelector";
 import RenderedText from "../../components/RenderedComponents/RenderedText";
 import Footer from "../../components/AuthFooter/Footer";
 import { useNavigation } from "@react-navigation/native";
@@ -71,6 +72,7 @@ export default function Register(){
                         <Input inputTitle="Data de Nascimento" placeholder="DD/MM/YYYY" value={birthDate} onChangeText={setBirthDate} />
                         <Input id="password" inputTitle="Senha" placeholder="••••••••••••" value={password} onChangeText={setPassword} />
                         <Input id="password" inputTitle="Confirme Senha" placeholder="••••••••••••" value={confirmPassword} onChangeText={setConfirmPassword} />
+                        <GenderSelector selectedGender={gender} onSelect={setGender} />
                     </View>
                     <RenderedText style={styles.text}>Ao continuar, você concorda com</RenderedText>
                     <View style={styles.politicsContainer}>

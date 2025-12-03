@@ -2,70 +2,86 @@ import { StyleSheet } from "react-native";
 import { LeagueSpartan_500Medium, LeagueSpartan_300Light} from "@expo-google-fonts/league-spartan";
 
 export const stylesProviderCard = StyleSheet.create({
-    card: {
-    flexDirection: 'row', // Organiza os itens (foto | informações) em linha
-    alignItems: 'center', // Alinha a foto e o container de informações verticalmente no centro
-    height: 130,
-    width: 'auto',
-    backgroundColor: '#fee38a', // A cor de fundo amarelada do card (aproximada do Figma)
-    borderRadius: 25, // Um borderRadius alto para deixar as bordas bem arredondadas
-    marginHorizontal: 16, // Espaçamento nas laterais
-    marginVertical: 8, // Espaçamento em cima e embaixo de cada card
-    padding: 16,
-    // Sombra para iOS
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    // Sombra para Android
-    elevation: 5,
+  container:{
+    flex: 1,
+    backgroundColor: '#FEE38A',
+    paddingHorizontal: 13,
+    paddingVertical: 10.5,
+    width: 300,
+    height: 131,
+    borderRadius: 17,
+    alignSelf: 'center',
+    marginVertical: 7
   },
-  profilePicture: {
+  insideCard:{
+    flexDirection: 'row',
+    width: 274,
+    height: 110,
+    gap: 14
+  },
+  leftSide:{
+    flexDirection: 'row',
+    width: 240,
+    height: 110,
+    gap: 8
+  },
+  photo:{
+    width: 110,
+    height: 110,
+    borderRadius: 100
+  },
+  info:{
+    width: 117,
+    height: 64,
+    marginVertical: 23,
+    justifyContent: "flex-end",
+  },
+  namePlate:{
+    width: 240,
+    height: 31,
+    paddingBottom: 11
+  },
+  infoPlate:{
+    flexDirection: "row",
     width: 100,
-    height: 100,
-    borderRadius: 50, // Metade da largura/altura para um círculo perfeito
-    marginRight: 16,
+    height: 22,
+    alignSelf: "flex-start",
   },
-  infoContainer: {
-    flex: 1, // Faz este container ocupar todo o espaço restante na direita
+  rightSide:{
+    height: 110,
+    alignContent: "flex-end",
   },
-  textContainer: {
-    marginBottom: 12, // Espaço entre o texto e os botões de ação
+  favButton:{
+    width: 26,
+    height: 26,
+    backgroundColor: '#FFF',
+    borderRadius: 100,
+    justifyContent: "center",
+    alignItems: "center"
   },
-  profileName: {
-    fontSize: 22,
+  profileName:{
+    fontSize: 18,
     color: '#2260ff',
+    fontFamily: 'LeagueSpartan_500Medium',
+    lineHeight: 18
   },
-  profileService: {
-    fontSize: 16,
-    color: '#17140c',
+  profileService:{
+    fontSize: 14,
+    color: '#070707ff',
+    fontFamily: 'LeagueSpartan_300Light',
+    lineHeight: 14
   },
-  actionsContainer: {
-    flexDirection: 'row', // Coloca os botões e ícones em linha
-    alignItems: 'center', // Alinha todos os itens de ação verticalmente
-  },
-  infoButton: {
-    backgroundColor: '#2260ff', // Cor azul do botão (pode ser ajustada)
-    borderRadius: 20, // Bordas totalmente arredondadas (estilo pílula)
-    paddingVertical: 6,
-    paddingHorizontal: 16,
-    marginRight: 10,
-    height: 30,
-    justifyContent: 'center',
+  infoButton:{
+    flexDirection: "row",
+    width: 46,
+    height: 22,
+    marginTop: 6,
+    gap: 3,
     alignItems: 'center'
   },
-  infoButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
+  label:{
+    color: '#2260ff',
     fontSize: 15,
-  },
-  iconButton: {
-    marginLeft: 5, // Espaçamento entre os ícones
-    backgroundColor: '#ffffffff',
-    borderRadius: 25,
-    width: 30,
-    height: 30,
-    alignItems: 'center',
-    justifyContent: 'center'
+    fontFamily: "LeagueSpartan_400Regular"
   }
 });

@@ -33,6 +33,11 @@
           "fonts": ["node_modules/@expo-google-fonts/league-spartan/600SemiBold/LeagueSpartan_600SemiBold.ttf", "node_modules/@expo-google-fonts/league-spartan/100Thin/LeagueSpartan_100Thin.ttf", "node_modules/@expo-google-fonts/league-spartan/300Light/LeagueSpartan_300Light.ttf", "node_modules/@expo-google-fonts/league-spartan/400Regular/LeagueSpartan_400Regular.ttf", "node_modules/@expo-google-fonts/league-spartan/500Medium/LeagueSpartan_500Medium.ttf"]
         }
       ]
-    ]
+    ],
+    "androidStatusBar": {
+        "backgroundColor": "#FEE38A",
+        "barStyle": "dark-content",
+        "translucent": false
+    }
   }
 }

@@ -2,40 +2,40 @@ import { StyleSheet } from "react-native";
 
 const stylesInfoText = StyleSheet.create({
   bottomSection: {
-    width: 300,
+    width: 285,
     alignSelf: 'center',
-    paddingBottom: 150
+    paddingBottom: 75,
+    gap: 10,
+    marginTop: 20
+  },
+  sectionContainer:{
+    width: 285
   },
   sectionTitle: {
     fontSize: 20,
-    fontFamily: 'LeagueSpartan_700Bold',
+    fontFamily: 'LeagueSpartan_600SemiBold',
     color: '#A04D1C',
-    marginTop: 20, // Espaço acima de cada título
-    marginBottom: 10, // Espaço abaixo de cada título
+    marginBottom: 5
   },
   sectionText: {
     fontSize: 14,
     fontFamily: 'LeagueSpartan_300Light',
     color: '#000',
-    lineHeight: 20, // Melhora a legibilidade do parágrafo
+    lineHeight: 20,
   },
   highlightItem: {
-    flexDirection: 'row', // Coloca a bolinha ao lado do texto
-    alignItems: 'flex-start', // Alinha no topo caso o texto tenha mais de uma linha
-    marginBottom: 2, // Espaço entre os itens da lista
+    flexDirection: 'row',
+    alignItems: 'flex-start', 
+    marginBottom: 2
   },
   highlightBullet: {
     fontSize: 14,
     color: '#000',
     marginRight: 8,
-    lineHeight: 20, // Alinha verticalmente com o texto
+    lineHeight: 20
   },
   highlightText: {
-    flex: 1, // Faz o texto ocupar o espaço restante, quebrando a linha se necessário
-    fontSize: 14,
-    fontFamily: 'LeagueSpartan_400Regular',
-    color: '#000',
-    lineHeight: 20,
+    flex: 1
   },
 });
 
