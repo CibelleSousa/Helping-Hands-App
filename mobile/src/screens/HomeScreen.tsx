@@ -1,21 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import RenderedText from "../components/RenderedComponents/RenderedText";
 import HeaderHome from "../components/HeaderHome/HeaderHome";
 import HomeServiceList from "../components/HomeServiceList";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
 import { useGetProvidersQuery } from "../store/api/apiSlice";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { ServiceStackParamList } from "../routes/ServicesStackNavigator";
 
 type HomeNavigationProp = NativeStackNavigationProp<any>;
 
 export default function HomeScreen() {
     const navigation = useNavigation<HomeNavigationProp>();
-    const user = useSelector((state: RootState) => state.auth.user);
     const { data: providers = []} = useGetProvidersQuery();
 
     const favorites = providers.filter(p => p.isFavorite);
@@ -27,7 +23,7 @@ export default function HomeScreen() {
 
     return(
         <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
-            {user && <HeaderHome profile={user}/>}
+            <HeaderHome />
             <ScrollView contentContainerStyle={{ paddingBottom: 50 }}>
                 <RenderedText style={[styles.titles, {marginTop: 21}]}>Sua Agenda</RenderedText>
                 <View style={styles.reserved}></View>
